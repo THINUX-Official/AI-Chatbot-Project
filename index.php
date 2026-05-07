@@ -1,45 +1,48 @@
-<?php include 'includes/db.php'; ?>
+<?php include 'includes/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Travel Chat Bot</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ceylon Travel Assistant</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=final3">
 </head>
 <body>
-    <div class="page">
-        <div class="left-panel">
-            <div class="badge">AI Coursework 2026</div>
-            <h1>Ceylon Travel Assistant</h1>
-            <p>An AI based chatbot for Sri Lanka travel and tourism support.</p>
-            <ul>
-                <li>Natural Language Interface</li>
-                <li>Inference Engine</li>
-                <li>MySQL Knowledge Base</li>
-                <li>Simple Learning Feature</li>
-            </ul>
-            <a class="admin-link" href="admin.php">Admin Panel</a>
-        </div>
+<header class="site-header">
+  <a class="brand" href="index.php"><span class="brand-badge">AI</span><span>AI Travel Support Assistant</span></a>
+  <nav class="header-nav">
+    <?php if (isLoggedIn()): ?>
+      <span>Hi, <?= htmlspecialchars($_SESSION['name']) ?></span>
+      <?php if (isAdmin()): ?><a class="nav-outline" href="admin.php">Admin Panel</a><?php endif; ?>
+      <a class="nav-btn" href="logout.php">Logout</a>
+    <?php else: ?>
+      <a class="nav-outline" href="login.php">Login</a>
+      <a class="nav-btn" href="register.php">Register</a>
+    <?php endif; ?>
+  </nav>
+</header>
 
-        <div class="chat-card">
-            <div class="chat-header">
-                <div>
-                    <h2>Travel Chat Bot</h2>
-                    <span>Ask about packages, destinations, booking or contact.</span>
-                </div>
-                <div class="online">Online</div>
-            </div>
-            <div id="chatBox" class="chat-box">
-                <div class="message bot">Hello! I am your Sri Lanka Travel Assistant. How can I help you?</div>
-            </div>
-            <form id="chatForm" class="chat-form">
-                <input type="text" id="message" placeholder="Type your message..." autocomplete="off" required>
-                <button type="submit">Send</button>
-            </form>
-            <div class="help-text">Try: “show packages”, “best places in Sri Lanka”, “contact number”</div>
-        </div>
+<main class="chat-page">
+  <section class="chat-panel">
+    <div class="chat-header">
+      <div class="chat-title">
+        <h1>Sri Lanka Tourism Assistant</h1>
+        <p>Get instant support for Sri Lanka tour packages, destinations, bookings and travel information.</p>
+      </div>
+      <div class="online">Online</div>
     </div>
-    <script src="assets/js/chat.js"></script>
+    <div id="chatBox" class="chat-box">
+      <div class="message bot">Hello! I am your Sri Lanka Travel Assistant. How can I help you?</div>
+    </div>
+    <div class="chat-form-wrap">
+      <form id="chatForm" class="chat-form">
+        <input type="text" id="message" placeholder="Type your travel question here..." autocomplete="off" required>
+        <button type="submit">Send</button>
+      </form>
+     
+    </div>
+  </section>
+</main>
+<script src="assets/js/chat.js?v=final3"></script>
 </body>
 </html>
